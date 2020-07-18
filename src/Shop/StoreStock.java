@@ -10,6 +10,7 @@ import java.util.List;
 public class StoreStock {
 
     private List<Product> productList = new ArrayList<>();
+    private String heading="id   |           name                  | price     | price after discount   | additional information        ";
 
     public StoreStock() {
         productList.add(new CD(11, "Ambient", 300, 1999));
@@ -37,20 +38,37 @@ public class StoreStock {
         productList.add(product);
     }
 
-    public void removeProduct(Product product){
+    public void removeProduct(Product product) {
         productList.remove(product);
+
     }
 
+    public void editProductPrice(Product product, double price) throws ShopException {
+        if (productList.contains(product)) {
+            product.setPrice(price);
+            return;
+        }
+        throw new ShopException("Product doesn't exist");
+    }
+
+    public void editProductName(Product product, String name) throws ShopException {
+        if (productList.contains(product)) {
+            product.setName(name);
+            return;
+        }
+        throw new ShopException("Product doesn't exist");
+
+    }
 
     public void printListOfAvailableProducts(){
-        System.out.println("id   |           name                  | price     | price after discount   | additional information        ");
+        System.out.println(heading);
         for (Product product : productList) {
             System.out.println(product);
         }
 
     }
     public void sortByNaturalOrder(){
-        System.out.println("id   |           name                  | price     | price after discount   | additional information        ");
+        System.out.println(heading);
         Collections.sort(productList);
         for (Product product : productList) {
             System.out.println(product);
@@ -58,7 +76,7 @@ public class StoreStock {
     }
 
     public void sortByPrize(SortType sortType){
-        System.out.println("id   |           name                  | price     | price after discount   | additional information        ");
+        System.out.println(heading);
         List<Product>productSortedByPrize=compareByPrice(sortType);
         for (Product product : productSortedByPrize) {
             System.out.println(product);
@@ -98,10 +116,5 @@ public class StoreStock {
     }
 
 
-
-
-    /*
-    wstaw sortowanie i opcje wydruku tylko z danej kategorii
-     */
 
 }

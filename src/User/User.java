@@ -1,24 +1,43 @@
 package User;
 
 import java.util.Objects;
+import java.util.Scanner;
+
 
 public class User {
-
-
 
         private String name;
         private String email;
         private String password;
-        private boolean admin;
+        private UserType userType;
+        private boolean login;
 
-        public User(String name, String email, String password, boolean admin) {
-            this.name = name;
-            this.email = email;
-            this.password = password;
-            this.admin = admin;
-        }
+    public User(String name, String email, String password, UserType userType) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.userType = userType;
+        this.login = false;
+    }
 
-        public String getEmail() {
+    public User() {
+    }
+
+
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
             return email;
         }
 
@@ -26,31 +45,42 @@ public class User {
             return password;
         }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof User)) return false;
-            User user = (User) o;
-            return admin == user.admin &&
-                    Objects.equals(name, user.name) &&
-                    Objects.equals(email, user.email) &&
-                    Objects.equals(password, user.password);
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(name, email, password, admin);
-        }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-        @Override
+    public void setLogin(boolean login) {
+        this.login = login;
+    }
+
+    public boolean isLogin() {
+        return login;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(email, user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
+    }
+
+    @Override
         public String toString() {
-            return "User{" +
-                    "name='" + name + '\'' +
-                    ", email='" + email + '\'' +
-                    ", password='" + password + '\'' +
-                    ", admin=" + admin +
-                    '}';
+            String temp = String.format(": %-20s |: %-20s|: %-10s\n", name,email,login);
+            return temp;
         }
+
 
 
 }
